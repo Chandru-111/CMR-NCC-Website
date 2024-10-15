@@ -1,0 +1,10 @@
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+/* Body style */
+body {
+    margin: 0;
+    overflow-x: hidden; 
+}

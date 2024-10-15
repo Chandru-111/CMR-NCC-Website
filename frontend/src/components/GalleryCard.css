@@ -1,0 +1,46 @@
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%; 
+  margin-bottom: 50px;
+  max-width: 800px;
+  height: 400px; 
+  overflow: hidden;
+  background-color: #f0f0f0; 
+  border-radius: 10px; 
+}
+
+
+.gallery-item {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+
+.gallery-item.active {
+  opacity: 1;
+}
+
+
+.gallery-item img {
+  width: 100%;  
+  height: 100%; 
+  object-fit: cover; 
+}
