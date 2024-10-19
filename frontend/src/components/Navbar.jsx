@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo1 from './logo1.png';  
@@ -8,6 +7,7 @@ import logo2 from './logo2.png';
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEnrollMenuOpen, setIsEnrollMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,8 +22,22 @@ function Navbar() {
     setIsEnrollMenuOpen(false); 
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+        setIsEnrollMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <nav className="navbar">
+    <nav className="navbar" ref={menuRef}>
       <div className="navbar-logo left">
         <img src={logo1} alt="Left Logo" />
       </div>

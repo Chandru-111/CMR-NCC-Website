@@ -82,6 +82,7 @@
   
   @media (max-width: 768px) {
     .navbar-links {
+      font-weight: bold;
       display: none; 
       flex-direction: column; 
       width: 100%; 
