@@ -18,9 +18,7 @@ import About from './components/About.jsx';
 import Profile1 from './components/Profile1.jsx';
 import CadetsInfo from './components/CadetsInfo.jsx'; 
 import MarkAttendence from './components/MarkAttendence.jsx';
-// Import the CadetsInfo component
 import './App.css';
-import MarkAttendance from './components/MarkAttendence.jsx';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -40,7 +38,8 @@ function App() {
                 <Route path="/profile1" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard1navbar />
+                            <Dashboard1navbar setIsAuthenticated={setIsAuthenticated} />
+                            
                             <hr />
                             <Profile1 />
                             <FooterDashboard1 />
@@ -52,9 +51,9 @@ function App() {
                 <Route path="/dashboard1" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard1navbar />
+                            <Dashboard1navbar setIsAuthenticated={setIsAuthenticated} />
                             <hr />
-                            <Dashboard1 setIsAuthenticated={setIsAuthenticated} />
+                            <Dashboard1 />
                             <FooterDashboard1 />
                         </>
                     ) : (
@@ -64,9 +63,9 @@ function App() {
                 <Route path="/dashboard2" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard2navbar />
+                            <Dashboard2navbar setIsAuthenticated={setIsAuthenticated} />
                             <hr />
-                            <Dashboard2 setIsAuthenticated={setIsAuthenticated} />
+                            <Dashboard2 />
                             <FooterDashboard2 />
                         </>
                     ) : (
@@ -76,7 +75,7 @@ function App() {
                 <Route path="/cadets-info" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard1navbar />
+                            <Dashboard1navbar setIsAuthenticated={setIsAuthenticated} />
                             <hr />
                             <CadetsInfo />
                             <FooterDashboard1 />
@@ -88,7 +87,7 @@ function App() {
                 <Route path="/MarkAttendence" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard1navbar />
+                            <Dashboard1navbar setIsAuthenticated={setIsAuthenticated} />
                             <hr />
                             <MarkAttendence />
                             <FooterDashboard1 />

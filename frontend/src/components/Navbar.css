@@ -177,4 +177,16 @@
 }
 
 
+.logout-button {
+  background-color: transparent; /* Same as other links */
+  color: rgb(18, 146, 237); /* Match the link color */
+  border: none; /* Remove border */
+  font-size: 25px; /* Match the font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: color 0.3s; 
+  font-family: cursive;/* Smooth color transition */
+}
 
+.logout-button:hover {
+  color: #e91111; /* Change color on hover, same as link hover effect */
+}
