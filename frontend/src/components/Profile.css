@@ -1,0 +1,109 @@
+/* Container for the profile form */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 100px;
+    margin-bottom: 30px; /* Padding around the container */
+}
+
+/* Profile card */
+.profile-card {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: transparent; /* White background for the card */
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(255, 246, 246, 0.2); /* Subtle shadow for depth */
+    color: #000; /* Black text color */
+    width: 700px; /* Set card width */
+    text-align: center; /* Center text within the card */
+    border-radius: 10px; /* Slightly rounded corners */
+}
+
+/* Title for the profile */
+.profile-title {
+    margin-bottom: 1.5rem; /* Space below the title */
+    color: #003366; /* Dark navy blue for the title */
+    font-size: 1.5rem; /* Larger font size for title */
+}
+
+/* Style for input fields */
+.profile-container input {
+    font-weight: bold;
+    font-family: cursive;
+    padding: 1rem; /* Padding inside the input */
+    width: 80%; /* Adjusted width for inputs */
+    margin: 0.5rem 0; /* Space between inputs */
+    border: 2px solid #00bfff; /* Light blue border */
+    border-radius: 25px; /* Rounded corners */
+    background-color: #f5f5f5; /* Light gray background */
+    color: #000; /* Black text color */
+    font-weight: bold; /* Bold text */
+    transition: border 0.3s; /* Smooth transition for border color */
+}
+
+/* Input focus effect */
+.profile-container input:focus {
+    outline: none; /* Remove outline */
+    border: 2px solid #0056b3; /* Darker blue border on focus */
+}
+
+/* Style for the save button */
+.profile-container button {
+    padding: 1rem; /* Padding inside the button */
+    background-color: #007bff; /* Blue background for button */
+    border: none; /* No border */
+    border-radius: 25px; /* Rounded corners */
+    color: white; /* White text color */
+    font-weight: bold; /* Bold text */
+    width: 86%; /* Same width as input fields */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color */
+}
+
+/* Button hover effect */
+.profile-container button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Style for success message */
+.success-message {
+    color: #28a745; /* Green color for success messages */
+    margin-top: 15px; /* Space above the message */
+    text-align: center; /* Center the message */
+    font-weight: bold; /* Make the text bold */
+    font-size: 18px; /* Larger font size for better visibility */
+}
+
+/* Error message style (if needed) */
+.error-message {
+    color: red; /* Red color for error messages */
+    margin-top: 15px; /* Space above the message */
+    text-align: center; /* Center the message */
+    font-weight: bold; /* Make the text bold */
+    font-size: 18px; /* Larger font size for better visibility */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .profile-card {
+        width: 90%; /* Make card width responsive on small screens */
+        padding: 1rem; /* Reduce padding for smaller screens */
+    }
+
+    .profile-title {
+        font-size: 1.2rem; /* Adjust title font size */
+    }
+
+    .profile-container input {
+        width: 90%; /* Adjust input width */
+        font-size: 16px; /* Adjust font size for inputs */
+    }
+
+    .profile-container button {
+        width: 90%; /* Adjust button width */
+        font-size: 16px; /* Adjust font size for button */
+    }
+}

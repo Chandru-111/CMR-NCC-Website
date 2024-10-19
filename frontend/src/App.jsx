@@ -14,21 +14,19 @@ import FooterDashboard1 from './components/FooterDashboard1.jsx';
 import FooterDashboard2 from './components/FooterDashboard2.jsx';
 import Events from './components/Events.jsx';
 import Register from './components/Register.jsx';
-import './App.css';
 import About from './components/About.jsx';
+import Profile1 from './components/Profile1.jsx';
+import CadetsInfo from './components/CadetsInfo.jsx'; 
+import MarkAttendence from './components/MarkAttendence.jsx';
+// Import the CadetsInfo component
+import './App.css';
+import MarkAttendance from './components/MarkAttendence.jsx';
 
 function App() {
-    
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    const handleLogout = () => {
-        console.log("User logged out");
-        setIsAuthenticated(false);
-    };
 
     return (
         <Router>
-            
             {!isAuthenticated && <Navbar />}
             <hr />
             <Routes>
@@ -38,11 +36,24 @@ function App() {
                 <Route path="/contactform" element={<ContactForm />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/Register" element={<Register />} />
-                <Route path="/About" element={<About/>} />
+                <Route path="/About" element={<About />} />
+                <Route path="/profile1" element={
+                    isAuthenticated ? (
+                        <>
+                            <Dashboard1navbar />
+                            <hr />
+                            <Profile1 />
+                            <FooterDashboard1 />
+                        </>
+                    ) : (
+                        <Login setIsAuthenticated={setIsAuthenticated} />
+                    )
+                } />
                 <Route path="/dashboard1" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard1navbar /> 
+                            <Dashboard1navbar />
+                            <hr />
                             <Dashboard1 setIsAuthenticated={setIsAuthenticated} />
                             <FooterDashboard1 />
                         </>
@@ -50,12 +61,37 @@ function App() {
                         <Login setIsAuthenticated={setIsAuthenticated} />
                     )
                 } />
-                    <Route path="/dashboard2" element={
+                <Route path="/dashboard2" element={
                     isAuthenticated ? (
                         <>
-                            <Dashboard2navbar handleLogout={handleLogout} /> {/* Only show Dashboard2 specific Navbar */}
+                            <Dashboard2navbar />
+                            <hr />
                             <Dashboard2 setIsAuthenticated={setIsAuthenticated} />
                             <FooterDashboard2 />
+                        </>
+                    ) : (
+                        <Login setIsAuthenticated={setIsAuthenticated} />
+                    )
+                } />
+                <Route path="/cadets-info" element={
+                    isAuthenticated ? (
+                        <>
+                            <Dashboard1navbar />
+                            <hr />
+                            <CadetsInfo />
+                            <FooterDashboard1 />
+                        </>
+                    ) : (
+                        <Login setIsAuthenticated={setIsAuthenticated} />
+                    )
+                } />
+                <Route path="/MarkAttendence" element={
+                    isAuthenticated ? (
+                        <>
+                            <Dashboard1navbar />
+                            <hr />
+                            <MarkAttendence />
+                            <FooterDashboard1 />
                         </>
                     ) : (
                         <Login setIsAuthenticated={setIsAuthenticated} />

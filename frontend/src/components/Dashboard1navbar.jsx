@@ -33,9 +33,9 @@ function Navbar(   ) {
           </button>
           <ul className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
             <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
-            <li><Link to="/about" onClick={handleLinkClick}>Profile</Link></li>
-            <li><Link to="/ContactForm" onClick={handleLinkClick}>Attendence</Link></li>
-            <li><Link to="/events" onClick={handleLinkClick}>Cadet's Info</Link></li>
+            <li><Link to="/profile1" onClick={handleLinkClick}>Profile</Link></li>
+            <li><Link to="/MarkAttendence" onClick={handleLinkClick}>Attendence</Link></li>
+            <li><Link to="/cadets-info" onClick={handleLinkClick}>Cadet'sInfo</Link></li>
             <li><Link to="/" onClick={handleLinkClick}>Logout</Link></li>
           </ul>
         </div>
