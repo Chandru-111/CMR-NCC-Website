@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+    <style>
+        /* static/attendance/styles.css */
+    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1, h2 {
+        color: #333;
+    }
+    
+    .table-selection, .column-selection {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .student-list {
+        margin-top: 20px;
+    }
+    
+    .student-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .attendance-options input {
+        margin-right: 10px;
+    }
+    
+    .submit-button {
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .submit-button:hover {
+        background-color: #4cae4c;
+    }
+    
+        </style>
+    </head>
+</head>
+<body>
+    <h1>Mark Attendance</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Mark Attendance</button>
+    </form>
+
+    <h2>One O Records</h2>
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>1 Nov 2024</th>
+            <th>2 Nov 2024</th>
+            <th>3 Nov 2024</th>
+            <th>4 Nov 2024</th>
+            <th>Percentage</th>
+        </tr>
+        {% for record in oneo_records %}
+        <tr >
+            <td>{{ record.student }}</td>
+            <td>{{ record.attendance_1_nov }}</td>
+            <td>{{ record.attendance_2_nov }}</td>
+            <td>{{ record.attendance_3_nov }}</td>
+            <td>{{ record.attendance_4_nov }}</td>
+            <td>{{ record.percentage }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>One S Records</h2>
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>1 Nov 2024</th>
+            <th>2 Nov 2024</th>
+            <th>3 Nov 2024</th>
+            <th>4 Nov 2024</th>
+            <th>Percentage</th>
+        </tr>
+        {% for record in ones_records %}
+        <tr>
+            <td>{{ record.student }}</td>
+            <td>{{ record.attendance_1_nov }}</td>
+            <td>{{ record.attendance_2_nov }}</td>
+            <td>{{ record.attendance_3_nov }}</td>
+            <td>{{ record.attendance_4_nov }}</td>
+            <td>{{ record.percentage|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    
+
+    <!-- Repeat for Two O, Two S, Three O, and Three S records similarly -->
+    
+</body>
+</html>

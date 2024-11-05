@@ -62,15 +62,8 @@ function Navbar({ setIsAuthenticated }) {
           <ul className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
             <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
             <li><Link to="/profile1" onClick={handleLinkClick}>Profile</Link></li>
-            <li>
-              <Link to="#" onClick={toggleEnrollMenu}>Attendance</Link>
-              <ul className={`dropdown-menu ${isEnrollMenuOpen ? 'show' : ''}`}>
-                <li>
-                  <a href="#" download onClick={handleLinkClick}>View My</a>
-                </li>
-                <li><Link to="#" onClick={handleLinkClick}>Cadets</Link></li>
-              </ul>
-            </li>
+            <li><Link to="#" onClick={handleLinkClick}>Attendence</Link></li>
+
             <li><Link to="/cadets-info" onClick={handleLinkClick}>Cadet's Info</Link></li>
             <li>
               <button onClick={handleLogout} className="logout-button">Logout</button>

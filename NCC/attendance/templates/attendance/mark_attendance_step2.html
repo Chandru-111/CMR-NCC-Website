@@ -1,0 +1,142 @@
+<!-- attendance/templates/attendance/mark_attendance_step2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance for {{ table_name }}</title>
+    <style>
+        /* static/attendance/styles.css */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .table-selection, .column-selection {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .student-list {
+            margin-top: 20px;
+        }
+
+        .student-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .attendance-options input {
+            margin-right: 10px;
+        }
+
+        .submit-button, .back-button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .submit-button:hover, .back-button:hover {
+            background-color: #4cae4c;
+        }
+
+        .back-button {
+            background-color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        // JavaScript to handle "Select All" functionality
+        function toggleAllAttendance(type) {
+            const checkboxes = document.querySelectorAll(`input[name="attendance"][value$="${type}"]`);
+            const selectAllCheckbox = document.getElementById(`select_all_${type}`);
+            checkboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        
+        <h2>Mark Attendance for {{ table_name }}</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="column-selection">
+                <label for="column_name">Select Day:</label>
+                <select name="column_name" id="column_name" required>
+                    <option value="" disabled selected>Select a Day</option>
+                    <option value="nov_1">November 1</option>
+                    <option value="nov_2">November 2</option>
+                    <option value="nov_3">November 3</option>
+                    <option value="nov_4">November 4</option>
+                </select>
+            </div>
+
+            <h3>Attendance Options:</h3>
+            <!-- "Select All" checkboxes for each attendance type -->
+            <div>
+                <label><input type="checkbox" id="select_all_Present" onclick="toggleAllAttendance('Present')"> Select All Present</label>
+                <label><input type="checkbox" id="select_all_Absent" onclick="toggleAllAttendance('Absent')"> Select All Absent</label>
+                <label><input type="checkbox" id="select_all_Holiday" onclick="toggleAllAttendance('Holiday')"> Select All Holiday</label>
+            </div>
+
+            <h3>Students:</h3>
+            <div class="student-list">
+                {% for record in records %}
+                    <div class="student-item">
+                        <label>{{ record.student }}</label>
+                        <div class="attendance-options">
+                            <input type="checkbox" name="attendance" value="{{ record.id }}-Present"> Present
+                            <input type="checkbox" name="attendance" value="{{ record.id }}-Absent"> Absent
+                            <input type="checkbox" name="attendance" value="{{ record.id }}-Holiday"> Holiday
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

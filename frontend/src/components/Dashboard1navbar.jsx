@@ -69,7 +69,6 @@ function Navbar({ setIsAuthenticated }) {
                             <Link to="#" onClick={toggleEnrollMenu}>Attendance</Link>
                             <ul className={`dropdown-menu ${isEnrollMenuOpen ? 'show' : ''}`}>
                                 <li><Link to="#" onClick={handleLinkClick}>Mark</Link></li>
-                                <li><a href="#" download onClick={handleLinkClick}>View My</a></li>
                                 <li><Link to="#" onClick={handleLinkClick}>Cadets</Link></li>
                             </ul>
                         </li>
