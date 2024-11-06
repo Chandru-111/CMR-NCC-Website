@@ -18,8 +18,8 @@ function Footer() {
       </div>
       <div className='done'>
     <h6>
-        Done by  <a href="https://github.com/Akash8245" target="_blank" rel="noopener noreferrer" className='done1'>Akash M</a> and Cadet
-        <a className='done2' href="https://github.com/" target="_blank" rel="noopener noreferrer"> Chandru</a>
+        Done by Cadet
+        <a className='done2' href="https://www.instagram.com/chandru._.kuruba/" target="_blank" rel="noopener noreferrer"> Chandru H (2023-2026) Batch</a>
     </h6>
 </div>
 

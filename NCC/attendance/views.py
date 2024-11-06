@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import OneO, OneS, TwoO, TwoS, ThreeO, ThreeS  # Import your models
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
 
+@login_required
 def mark_attendance_view(request):
     if request.method == 'POST':
         # Step 1: Handle the table selection
@@ -80,7 +84,12 @@ def mark_attendance_view(request):
 
 def success_view(request):
     return render(request, 'attendance/success.html')
+@login_required
 def view_percentage(request):
+    # Ensure only staff users can access the page
+    if not request.user.is_staff:
+        return redirect('view_percentage_login')  # Redirect to the login page if not staff
+
     if request.method == 'POST':
         # Get the selected table name
         table_name = request.POST.get('table_name')
@@ -106,6 +115,75 @@ def view_percentage(request):
             'table_name': table_name,
         })
 
-    # Render the initial selection form
+    # Render the initial selection form for the tables
     tables = ['OneO', 'OneS', 'TwoO', 'TwoS', 'ThreeO', 'ThreeS']
     return render(request, 'attendance/select_table.html', {'tables': tables})
+from django.contrib.auth import authenticate, login
+
+from django.contrib import messages
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            if user.is_staff:  # Ensure that only staff users are allowed
+                login(request, user)
+                return redirect('/mark-attendance/')  # Redirect to the attendance page after login
+            else:
+                messages.error(request, "You do not have permission to access this site.")
+                return redirect('/login/')  # Redirect back to login if user is not staff
+        else:
+            messages.error(request, "Invalid credentials")
+            return redirect('/login/')  # Redirect back to login if authentication fails
+
+    return render(request, 'login.html')  # Render the login page
+class StaffLoginView(LoginView):
+    template_name = 'attendance/login.html'  # Specify your login template
+
+    def form_valid(self, form):
+        user = form.get_user()
+        if user.is_staff:
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, "You do not have permission to access this site.")
+            return redirect('login')  # Redirect to login page if user is not staff
+        
+
+class ViewPercentageLoginView(LoginView):
+    template_name = 'attendance/view_percentage_login.html'
+
+@login_required
+def custom_redirect_view(request):
+    if request.user.is_staff:
+        return redirect('/view-percentage/')
+    else:
+        return redirect('/mark-attendance/')
+    
+def custom_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+
+            # Redirect based on whether the user is staff or not
+            if user.is_staff:
+                return redirect('/select-page/')  # Redirect staff to the selection page
+            else:
+                return redirect('/view-percentage/')  # Non-staff users are redirected directly to view percentage page
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'attendance/login.html', {'form': form})
+def select_page(request):
+    if request.user.is_staff:
+        # Staff users see both options
+        return render(request, 'attendance/select_page.html', {'is_staff': True})
+    else:
+        # Non-staff users only see the option for view-percentage
+        return render(request, 'attendance/select_page.html', {'is_staff': False})

@@ -8,6 +8,8 @@ SECRET_KEY = 'django-insecure-*xx@5v6abw8jzi)whfdhkwvs(e9x9bb8b_b#_5qwfp87k235l3
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+LOGIN_REDIRECT_URL = '/mark-attendance/'
+LOGOUT_REDIRECT_URL = '/login/'  # Assuming you want to redirect to the login page after logout
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -23,7 +23,14 @@ function Navbar({ setIsAuthenticated }) {
     const toggleEnrollMenu = () => {
         setIsEnrollMenuOpen(!isEnrollMenuOpen);
     };
+    const redirectToLogin = () => {
+        window.location.href = 'http://127.0.0.1:8000/login/';  // Redirect to the general login page
+    };
 
+    // Function to handle the redirect to the login page for view attendance
+    const redirectToViewAttendanceLogin = () => {
+        window.location.href = 'http://127.0.0.1:8000/view-percentage/login/';  // Redirect to view attendance login page
+    };
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         setIsAuthenticated(false);
@@ -66,11 +73,7 @@ function Navbar({ setIsAuthenticated }) {
                         <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
                         <li><Link to="/profile1" onClick={handleLinkClick}>Profile</Link></li>
                         <li>
-                            <Link to="#" onClick={toggleEnrollMenu}>Attendance</Link>
-                            <ul className={`dropdown-menu ${isEnrollMenuOpen ? 'show' : ''}`}>
-                                <li><Link to="#" onClick={handleLinkClick}>Mark</Link></li>
-                                <li><Link to="#" onClick={handleLinkClick}>Cadets</Link></li>
-                            </ul>
+                        <Link onClick={redirectToLogin}>Attendence</Link>
                         </li>
                         <li><Link to="/cadets-info" onClick={handleLinkClick}>Cadet's Info</Link></li>
                         <li>

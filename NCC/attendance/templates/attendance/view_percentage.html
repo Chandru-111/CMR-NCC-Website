@@ -5,43 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Percentage of Students</title>
-    <link rel="stylesheet" href="{% static 'attendance/styles.css' %}">  <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{% static 'attendance/styles.css' %}">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fefefe;
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
         }
 
-        h1, h2 {
-            color: #333;
+        h1 {
+            color: #0099ff;
+            margin-bottom: 1.5rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 1rem;
+            color: #000000;
         }
 
         th, td {
-            padding: 10px;
+            padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            font-weight: bold;
         }
 
         th {
             background-color: #f2f2f2;
-            font-weight: bold;
+            color: #0099ff;
+        }
+
+        /* New CSS class for red text */
+        .low-percentage {
+            color: red;
         }
 
         a {
@@ -49,32 +62,18 @@
             margin-top: 20px;
             color: #007bff;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
         }
 
         a:hover {
-            text-decoration: underline;
-        }
-
-        .submit-button {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: inline-block;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .submit-button:hover {
-            background-color: #4cae4c;
+            color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Percentage for {{ table_name }}</h1>
+        <h1>Percentage of {{ table_name }}</h1>
         <table>
             <thead>
                 <tr>
@@ -86,7 +85,9 @@
                 {% for record in records %}
                     <tr>
                         <td>{{ record.student }}</td>
-                        <td>{{ record.percentage }}%</td>
+                        <td class="{% if record.percentage < 75 %}low-percentage{% endif %}">
+                            {{ record.percentage }}%
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -17,7 +17,7 @@ import Register from './components/Register.jsx';
 import About from './components/About.jsx';
 import Profile1 from './components/Profile1.jsx';
 import CadetsInfo from './components/CadetsInfo.jsx'; 
-import MarkAttendence from './components/MarkAttendence.jsx';
+import MarkAttendance from './components/MarkAttendance.jsx';
 import './App.css';
 
 function App() {
@@ -84,12 +84,12 @@ function App() {
                         <Login setIsAuthenticated={setIsAuthenticated} />
                     )
                 } />
-                <Route path="/MarkAttendence" element={
+                <Route path="/MarkAttendance" element={
                     isAuthenticated ? (
                         <>
                             <Dashboard1navbar setIsAuthenticated={setIsAuthenticated} />
                             <hr />
-                            <MarkAttendence />
+                            <MarkAttendance />
                             <FooterDashboard1 />
                         </>
                     ) : (

@@ -11,7 +11,10 @@
             margin: 0;
             padding: 0;
         }
-
+        .unde{
+            text-decoration: none;
+            border-radius: 50px;
+        }
         .container {
             max-width: 600px;
             margin: 50px auto;
@@ -23,7 +26,7 @@
         }
 
         h1 {
-            color: #5cb85c;  /* Green color for success */
+            color: #004cff;  /* Green color for success */
         }
 
         a {
@@ -47,7 +50,7 @@
 <body>
     <div class="container">
         <h1>Attendance Marked Successfully!</h1>
-        <a href="{% url 'mark_attendance' %}">Mark More Attendance</a>
+        <a class="unde" href="{% url 'mark_attendance' %}">Mark More Attendance</a>
     </div>
 </body>
 </html>

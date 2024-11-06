@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Option</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 2rem;
+        }
+
+        h2 {
+            color: #0099ff;
+            margin-bottom: 1rem;
+        }
+
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        li {
+            margin: 1rem 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0099ff;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border: 2px solid #0099ff;
+            border-radius: 50px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+            width: 100%;
+        }
+
+        a:hover {
+            background-color: #0099ff;
+            color: #fff;
+        }
+
+        .auth-button {
+            padding: 1rem;
+            background-color: #f87f8b;
+            border: none;
+            border-radius: 50px;
+            color: #000000;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .auth-button:hover {
+            background-color: #f01616;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome, {{ request.user.username }}!</h2>
+
+    {% if is_staff %}
+        <h3>Choose an option:</h3>
+        <ul>
+            <li><a href="{% url 'mark_attendance' %}" class="auth-button">Mark Attendance</a></li>
+            <li><a href="{% url 'view_percentage' %}" class="auth-button">View Percentage</a></li>
+        </ul>
+    {% else %}
+        <h3>Choose an option:</h3>
+        <ul>
+            <li><a href="{% url 'view_percentage' %}" class="auth-button">View Percentage</a></li>
+        </ul>
+    {% endif %}
+</body>
+</html>

@@ -19,6 +19,9 @@ function Navbar({ setIsAuthenticated }) {
     setIsMenuOpen(false);
     setIsEnrollMenuOpen(false);
   };
+  const redirectToLogin = () => {
+    window.location.href = 'http://127.0.0.1:8000/login/';  // Redirect to the general login page
+};
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
@@ -29,7 +32,7 @@ function Navbar({ setIsAuthenticated }) {
   const toggleEnrollMenu = () => {
     setIsEnrollMenuOpen(!isEnrollMenuOpen);
   };
-
+ 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -62,8 +65,9 @@ function Navbar({ setIsAuthenticated }) {
           <ul className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
             <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
             <li><Link to="/profile1" onClick={handleLinkClick}>Profile</Link></li>
-            <li><Link to="#" onClick={handleLinkClick}>Attendence</Link></li>
-
+            <li>
+                        <Link onClick={redirectToLogin}>Attendence</Link>
+                        </li>
             <li><Link to="/cadets-info" onClick={handleLinkClick}>Cadet's Info</Link></li>
             <li>
               <button onClick={handleLogout} className="logout-button">Logout</button>

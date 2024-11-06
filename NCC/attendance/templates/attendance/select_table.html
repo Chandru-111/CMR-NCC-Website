@@ -2,93 +2,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Table</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  <!-- External CSS link -->
     <style>
         /* static/attendance/styles.css */
-    
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .container {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    h1, h2 {
-        color: #333;
-    }
-    
-    .table-selection, .column-selection {
-        margin-bottom: 20px;
-    }
-    
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    
-    select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    
-    .student-list {
-        margin-top: 20px;
-    }
-    
-    .student-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    .attendance-options input {
-        margin-right: 10px;
-    }
-    
-    .submit-button {
-        background-color: #5cb85c;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    .submit-button:hover {
-        background-color: #4cae4c;
-    }
-    
-        </style>
-    </head>
-    <meta charset="UTF-8">
-    <title>Select Table</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #444;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;            border-radius: 50px;
+
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #046bfa;
+        }
+        .sel{
+            border-radius: 50px;
+
+        }
+        button {
+            background-color: #d9534f;  /* Red button */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff0800;  /* Darker red on hover */
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            select, button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            select, button {
+                padding: 10px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Select a Table to View Percentage</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="table_name">Choose a table:</label>
-        <select name="table_name" id="table_name">
-            <option value="">--Select Table--</option>
-            {% for table in tables %}
-                <option value="{{ table }}">{{ table }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">View Percentage</button>
-    </form>
+    <div class="container">
+        <h1>Select a Table to View Percentage</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="table_name">Choose a table:</label>
+            <select class="sel" name="table_name" id="table_name">
+                <option value="">--Select Table--</option>
+                {% for table in tables %}
+                    <option value="{{ table }}">{{ table }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">View Percentage</button>
+        </form>
+    </div>
 </body>
 </html>
