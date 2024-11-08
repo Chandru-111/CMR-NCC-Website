@@ -3,19 +3,20 @@ import axios from 'axios';
 import './Profile.css'; // Import the new CSS file
 
 const Profile1 = () => {
-    const [formData, setFormData] = useState({
-        rank: '',
-        full_name: '',
-        father_name: '',
-        mother_name: '',
-        aadhar_no: '',
-        course: '',
-        school_name: '',
-        campus: '',
-        register_number: '',
-        phone_number: '',
-        regimental_number: ''
-    });
+   const [formData, setFormData] = useState({
+    Rank: '',
+    FullName: '',
+    FatherName: '',
+    MotherName: '',
+    AadharNo: '',
+    Course: '',
+    SchoolName: '',
+    Campus: '',
+    registerNumber: '',
+    phoneNumber: '',
+    regimentalNumber: ''
+});
+
 
     const [isProfileSaved, setIsProfileSaved] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -36,10 +37,13 @@ const Profile1 = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('Submitting data:', formData); // Log form data before submitting
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/save-profile/', formData);
+            const response = await axios.post('http://127.0.0.1:8000/api/save-profile/', formData, {
+                headers: { 'Content-Type': 'application/json' },
+            });
             console.log('Profile saved successfully:', response.data);
-
+    
             // Save profile data to local storage
             localStorage.setItem('userProfile', JSON.stringify(formData));
             setIsProfileSaved(true);
@@ -47,12 +51,13 @@ const Profile1 = () => {
         } catch (error) {
             console.error('Error saving profile:', error);
             if (error.response) {
-                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response data:', JSON.stringify(error.response.data)); // Log detailed response
             }
             setSuccessMessage('Error saving data. Please try again.');
         }
     };
-
+    
     return (
         <div className="profile-container">
             <div className="profile-card">
